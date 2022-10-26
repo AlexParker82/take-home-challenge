@@ -1,0 +1,10 @@
+body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+td {
+    padding: 2rem;
+}
