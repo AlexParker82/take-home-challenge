@@ -1,21 +1,31 @@
-const apiUrl = 'https://jsonplaceholder.typicode.com/users';
-const userRow = document.getElementById("userRow");
-const userTable = document.getElementById("userTable");
+const apiUrl = "https://jsonplaceholder.typicode.com/users";
+const userContainer = document.getElementById("userContainer");
+const postContainer = document.getElementById("postContainer");
 
 fetch(apiUrl)
+  .then((res) => res.json())
+  .then((data) => {
+    data.forEach((user, index) => {
+      let userDiv = document.createElement("div");
+      userDiv.setAttribute("id", user.id);
+      userDiv.classList.add("userDiv");
+      userDiv.textContent = user.name;
+      userContainer.append(userDiv);
+    });
+  });
+
+userContainer.addEventListener("click", (e) => {
+  postContainer.innerHTML = "";
+  let userId = e.target.id;
+  fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
     .then((res) => res.json())
     .then((data) => {
-        data.forEach((user, index) => {
-            let userTd = document.createElement('tr');
-            userTd.setAttribute('id', user.id)
-            userTd.textContent = user.name;
-            userRow.append(userTd);
-        })
+      data.forEach((post, index) => {
+        let postDiv = document.createElement("div");
+        postDiv.setAttribute("id", post.id);
+        postDiv.classList.add("userDiv");
+        postDiv.textContent = post.body;
+        postContainer.append(postDiv);
+      });
     });
-
-userTable.addEventListener("click", (e) => {
-    let userId = e.target.id;
-    fetch(`https://jsonplaceholder.typicode.com/posts/${userId}`)
-        .then((res) => res.json())
-        .then((data) => console.log(data.body))
-})
+});
