@@ -21,10 +21,17 @@ userContainer.addEventListener("click", (e) => {
     .then((res) => res.json())
     .then((data) => {
       data.forEach((post, index) => {
-        let postDiv = document.createElement("div");
-        postDiv.setAttribute("id", post.id);
-        postDiv.classList.add("userDiv");
-        postDiv.textContent = post.body;
+        let postDiv = document.createElement('div');
+        let title = document.createElement('div');
+        let body = document.createElement('div');
+
+        title.classList.add("title");
+        title.textContent = `Title: ${post.title}`;
+        body.textContent = `Body: ${post.body}`;
+        postDiv.setAttribute('id', post.id);
+        postDiv.classList.add('postDiv');
+        postDiv.append(title);
+        postDiv.append(body);
         postContainer.append(postDiv);
       });
     });
