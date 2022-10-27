@@ -2,17 +2,22 @@ const apiUrl = "https://jsonplaceholder.typicode.com/users";
 const userContainer = document.getElementById("userContainer");
 const postContainer = document.getElementById("postContainer");
 
-fetch(apiUrl)
-  .then((res) => res.json())
-  .then((data) => {
-    data.forEach((user, index) => {
-      let userDiv = document.createElement("div");
-      userDiv.setAttribute("id", user.id);
-      userDiv.classList.add("userDiv");
-      userDiv.textContent = user.name;
-      userContainer.append(userDiv);
+const getUsers = () => {
+  fetch(apiUrl)
+    .then((res) => res.json())
+    .then((data) => {
+      data.forEach((user, index) => {
+        let userDiv = document.createElement("div");
+        userDiv.setAttribute("id", user.id);
+        userDiv.classList.add("userDiv");
+        userDiv.textContent = user.name;
+        userContainer.append(userDiv);
+      });
     });
-  });
+}
+
+getUsers();
+
 
 userContainer.addEventListener("click", (e) => {
   postContainer.innerHTML = "";
