@@ -26,12 +26,14 @@ div.users {
 div.userDiv {
     padding: .5rem;
     font-size: large;
+    width: 250px;
     
 }
 
 div.userDiv:hover {
     cursor: pointer;
     color: rgb(12, 23, 51);
+    font-weight: bold;
 }
 
 div.posts {
